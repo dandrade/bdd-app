@@ -15,7 +15,7 @@ blocks:
       jobs:
         - name: Bundle
           commands:
-            - bundle install --development --path vendor/bundle
+            - bundle install --deployment --path vendor/bundle
         - name: Rake DB Setup
           commands:
             - 'bundle exec rake db:setup'
