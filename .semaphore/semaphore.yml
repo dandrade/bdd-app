@@ -1,0 +1,36 @@
+version: v1.0
+name: Test MyApp
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Bundle
+    task:
+      env_vars:
+        - name: DATABASE_URL
+          value: 'postgresql://postgres:@0.0.0.0:5432/myapp_test'
+        - name: RAILS_ENV
+          value: test
+      jobs:
+        - name: Bundle
+          commands:
+            - bundle install --development --path vendor/bundle
+        - name: Rake DB Setup
+          commands:
+            - 'bundle exec rake db:setup'
+        - name: Rake DB Test
+          commands:
+            - 'bundle exec rake db:test:prepare'
+  - name: RSpec
+    task:
+      jobs:
+        - name: RSpec Tests
+          commands:
+            - bundle exec rspec
+  - name: Cucumber
+    task:
+      jobs:
+        - name: Cucumber Tests
+          commands:
+            - bundle exec cucumber
