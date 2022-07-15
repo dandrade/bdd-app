@@ -19,7 +19,7 @@ blocks:
             - sem-version node 16.14.2
             - checkout
             - cache restore
-            - bundle install
+            - bundle install --deployment --path vendor/bundle
             - cache store
         - name: Rake DB Setup
           commands:
