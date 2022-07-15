@@ -15,7 +15,12 @@ blocks:
       jobs:
         - name: Bundle
           commands:
-            - bundle install --deployment --path vendor/bundle
+            - sem-version ruby 2.6.5
+            - sem-version node 16.14.2
+            - checkout
+            - cache restore
+            - bundle install
+            - cache store
         - name: Rake DB Setup
           commands:
             - 'bundle exec rake db:setup'
