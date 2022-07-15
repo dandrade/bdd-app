@@ -15,6 +15,7 @@ Given("I have populated my inventory with several books") do
 end
 
 Then("I should see the list of my books") do
-  expect(page).to have_content("Don Quijote")
+  # puts page.body
+  expect(page).to have_content("Don Quixote")
   expect(page).to have_content("Moby Dick")
 end
